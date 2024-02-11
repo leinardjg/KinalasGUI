@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="446.0" prefWidth="638.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kinalas.kinalasgui.KinalasController">
+   <children>
+      <AnchorPane VBox.vgrow="ALWAYS">
+         <children>
+            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox VBox.vgrow="ALWAYS">
+                     <children>
+                        <AnchorPane prefWidth="300.0">
+                           <children>
+                              <VBox alignment="BOTTOM_CENTER" prefHeight="446.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TabPane fx:id="ordersTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
+                                    <HBox prefHeight="75.0" VBox.vgrow="NEVER">
+                                       <children>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete Order" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="1.0" top="2.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="2.0" left="1.0" right="2.0" top="2.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                      <tabs>
+                                        <Tab text="Combos" />
+                                        <Tab text="Foods" />
+                                      </tabs>
+                                    </TabPane>
+                                    <HBox VBox.vgrow="NEVER">
+                                       <children>
+                                          <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="John Doe 299792" />
+                                             </children>
+                                          </VBox>
+                                          <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="05:44:23 AM" VBox.vgrow="ALWAYS" />
+                                             </children></VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </AnchorPane>
+   </children>
+</VBox>
