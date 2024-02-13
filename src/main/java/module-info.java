@@ -9,6 +9,6 @@ module com.kinalas.kinalasgui {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.kinalas.kinalasgui to javafx.fxml;
-    exports com.kinalas.kinalasgui;
+    opens com.kinalas.gui to javafx.fxml;
+    exports com.kinalas.gui;
 }

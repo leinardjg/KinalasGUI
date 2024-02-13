@@ -1,4 +1,4 @@
-package com.kinalas.kinalasgui;
+package com.kinalas.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
