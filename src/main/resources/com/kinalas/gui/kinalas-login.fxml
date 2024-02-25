@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kinalas.gui.KinalasController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kinalas.gui.login.LoginController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <TextField prefWidth="360.0" promptText="Employee ID">
+            <TextField fx:id="employeeCodeField" prefWidth="360.0" promptText="Employee ID">
                <font>
                   <Font name="Monaco" size="24.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" text="Login">
+            <Button mnemonicParsing="false" onAction="#onLogin" text="Login">
                <VBox.margin>
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </VBox.margin>
