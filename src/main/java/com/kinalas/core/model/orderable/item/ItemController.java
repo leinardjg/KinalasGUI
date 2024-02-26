@@ -67,6 +67,25 @@ public class ItemController {
 
     }
 
+    protected static ArrayList<String> getTypes() {
+        String query = String.format("""
+                SELECT DISTINCT type FROM %s;
+                """, tableName);
+
+        try (ResultSet resultSet = databaseController.executeQuery(query)) {
+
+            ArrayList<String> result = new ArrayList<>();
+
+            while (resultSet.next()) {
+                result.add(resultSet.getString("type"));
+            }
+
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     protected static ArrayList<Item> getAll() {
 
         String query = String.format("""

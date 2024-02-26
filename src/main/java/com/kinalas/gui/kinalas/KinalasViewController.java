@@ -1,14 +1,13 @@
 package com.kinalas.gui.kinalas;
 
 import com.kinalas.core.kinalas.Kinalas;
+import com.kinalas.core.model.orderable.item.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-import java.beans.EventHandler;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class KinalasViewController {
 
@@ -36,7 +35,13 @@ public class KinalasViewController {
         this.employeeInfoLabel.setText(kinalas.getEmployee().getFirstName() + " " + kinalas.getEmployee().getLastName() + " " + kinalas.getEmployee().getId());
         this.timeLabel.setText("Live time WIP"); // todo
 
-        itemsTabPane.getTabs().add(new Tab());
+        itemsTabPane.getTabs().clear();
+        ArrayList<String> itemTypes = Item.getTypes();
+
+        for (String itemType : itemTypes) {
+            itemsTabPane.getTabs().add(new Tab(itemType + "s"));
+        }
+
     }
 
 }

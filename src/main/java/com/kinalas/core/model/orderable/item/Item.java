@@ -58,6 +58,10 @@ public class Item extends Orderable {
         return ItemController.getAll();
     }
 
+    public static ArrayList<String> getTypes() {
+        return ItemController.getTypes();
+    }
+
     // endregion
 
     // endregion
