@@ -1,9 +1,10 @@
 package com.kinalas.gui;
 
+import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.employee.Employee;
-import com.kinalas.gui.login.Login;
+import com.kinalas.gui.kinalas.KinalasView;
+import com.kinalas.gui.login.LoginView;
 import javafx.application.Application;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,11 +15,14 @@ public class KinalasGUI extends Application {
     public void start(Stage stage) throws IOException {
 
         Stage loginStage = new Stage();
-        loginStage.initModality(Modality.APPLICATION_MODAL);
-        Login login = new Login();
+        LoginView login = new LoginView();
         Employee employee = login.start(loginStage);
 
-        System.out.println(employee);
+        Stage kinalasStage = new Stage();
+        Kinalas kinalas = new Kinalas(employee.getId());
+        KinalasView kinalasView = new KinalasView(kinalasStage, kinalas);
+        kinalasView.start();
+
     }
 
     public static void main(String[] args) {
