@@ -9,7 +9,7 @@
    <children>
       <VBox alignment="CENTER" fillWidth="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <TextField fx:id="employeeCodeField" prefWidth="360.0" promptText="Employee ID">
+            <TextField fx:id="employeeCodeField" onInputMethodTextChanged="#onEmployeeCodeFieldChange" prefWidth="360.0" promptText="Employee ID">
                <font>
                   <Font name="Monaco" size="24.0" />
                </font>
@@ -19,6 +19,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </VBox.margin>
             </Button>
+            <Label fx:id="statusText" text="Label" visible="false" />
          </children>
       </VBox>
    </children>
