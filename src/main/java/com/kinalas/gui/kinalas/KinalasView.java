@@ -21,10 +21,10 @@ public class KinalasView {
     public void start() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("kinalas-view.fxml"));
-        ((KinalasViewController) fxmlLoader.getController()).setKinalas(this.kinalas);
 
         stage.setResizable(false);
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        ((KinalasViewController) fxmlLoader.getController()).initialize(this.kinalas);
         stage.setTitle("KinalasView");
         stage.setScene(scene);
         stage.showAndWait();

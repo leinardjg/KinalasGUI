@@ -45,7 +45,7 @@
                            <children>
                               <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                    <TabPane fx:id="itemsTabPane" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                                       <tabs>
                                         <Tab text="Combos" />
                                         <Tab text="Foods" />
@@ -67,12 +67,12 @@
                                        <children>
                                           <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="John Doe 299792" />
+                                                <Label fx:id="employeeInfoLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="John Doe 299792" />
                                              </children>
                                           </VBox>
                                           <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="05:44:23 AM" VBox.vgrow="ALWAYS" />
+                                                <Label fx:id="timeLabel" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="05:44:23 AM" VBox.vgrow="ALWAYS" />
                                              </children></VBox>
                                        </children>
                                        <padding>
