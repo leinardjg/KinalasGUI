@@ -22,12 +22,13 @@ public class KinalasView {
 
         FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("kinalas-view.fxml"));
 
-        stage.setResizable(false);
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        stage.setResizable(true);
+        Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
         ((KinalasViewController) fxmlLoader.getController()).initialize(this.kinalas);
         stage.setTitle("KinalasView");
         stage.setScene(scene);
         stage.showAndWait();
+
     }
 
 }

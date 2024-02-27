@@ -1,23 +1,33 @@
 package com.kinalas.gui.kinalas;
 
 import com.kinalas.core.kinalas.Kinalas;
+import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class KinalasViewController {
 
     private Kinalas kinalas;
     private int currentIndex = 1;
+    private final int itemsNumCol = 6;
 
     @FXML private TabPane itemsTabPane;
     @FXML private TabPane ordersTabPane;
     @FXML private Label employeeInfoLabel;
     @FXML private Label timeLabel;
+    @FXML private GridPane orderModifiersGridPane;
 
     @FXML
     private void onStart() {
@@ -33,15 +43,71 @@ public class KinalasViewController {
 
         this.kinalas = kinalas;
         this.employeeInfoLabel.setText(kinalas.getEmployee().getFirstName() + " " + kinalas.getEmployee().getLastName() + " " + kinalas.getEmployee().getId());
-        this.timeLabel.setText("Live time WIP"); // todo
+        this.initializeTime();
+        this.initializeItems();
+        this.initializeOrders();
 
+    }
+
+    private void initializeTime() {
+        this.timeLabel.setText("Live time WIP"); // todo
+    }
+
+    private void initializeItems() {
         itemsTabPane.getTabs().clear();
         ArrayList<String> itemTypes = Item.getTypes();
 
         for (String itemType : itemTypes) {
-            itemsTabPane.getTabs().add(new Tab(itemType + "s"));
+
+            Tab tab = new Tab(itemType + "s");
+            itemsTabPane.getTabs().add(tab);
+
+            List<Item> items = kinalas.getAvailableItems().stream().filter(item -> item.getType().equals(itemType)).toList();
+
+            GridPane gridPane = new GridPane();
+            HBox.setHgrow(gridPane, Priority.ALWAYS);
+
+            gridPane.setPadding(new Insets(2));
+
+            for (int i=0, j=0; i < items.size(); i++, j++) {
+
+                StackPane parentPane = new StackPane();
+                parentPane.setPadding(new Insets(2));
+
+                StackPane pane = new StackPane();
+                pane.setPadding(new Insets(10));
+                pane.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
+
+                Text text = new Text(items.get(i).getName());
+                text.setWrappingWidth(80);
+                text.setTextAlignment(TextAlignment.CENTER);
+
+                pane.getChildren().add(text);
+                parentPane.getChildren().add(pane);
+
+                GridPane.setConstraints(parentPane, i % itemsNumCol, j / itemsNumCol);
+                gridPane.getChildren().add(parentPane);
+
+            }
+
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setPercentWidth(100.0 / itemsNumCol);
+
+            for (int i=0; i < itemsNumCol; i++) {
+                gridPane.getColumnConstraints().add(columnConstraints);
+            }
+
+            tab.setContent(gridPane);
         }
 
+    }
+
+    private void initializeOrders() {
+        ordersTabPane.getTabs().clear();
+
+        for (Order order : kinalas.getOrders()) {
+            itemsTabPane.getTabs().add(new Tab(String.valueOf(order.getOrderNumber())));
+        }
     }
 
 }
