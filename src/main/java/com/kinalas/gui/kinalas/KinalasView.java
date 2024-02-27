@@ -25,7 +25,7 @@ public class KinalasView {
         stage.setResizable(true);
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
         ((KinalasViewController) fxmlLoader.getController()).initialize(this.kinalas);
-        stage.setTitle("KinalasView");
+        stage.setTitle("Kinalas");
         stage.setScene(scene);
         stage.showAndWait();
 

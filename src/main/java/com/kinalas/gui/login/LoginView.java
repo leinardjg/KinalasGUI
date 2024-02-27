@@ -14,7 +14,7 @@ public class LoginView {
         FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("kinalas-login.fxml"));
         stage.setResizable(false);
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-        stage.setTitle("KinalasView LoginView");
+        stage.setTitle("Kinalas Login");
         stage.setScene(scene);
         stage.showAndWait();
         return ((LoginController) fxmlLoader.getController()).getEmployee();
