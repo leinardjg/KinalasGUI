@@ -11,8 +11,8 @@ public class Item extends Orderable {
 
     // region constructors
 
-    protected Item(String id, String name, String description, double price, String type, ArrayList<OrderModifier> modifiers) {
-        super(id, name, description, price, modifiers);
+    public Item(String id, String name, String description, double price, String type, ArrayList<OrderModifier> modifiers) {
+        super(id.strip().replaceAll(" ", "_"), name, description, price, modifiers);
         this.type = type.strip().replaceAll(" ", "_").toLowerCase();
     }
 
