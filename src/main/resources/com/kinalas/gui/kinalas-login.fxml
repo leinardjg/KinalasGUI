@@ -9,11 +9,16 @@
    <children>
       <VBox alignment="CENTER" fillWidth="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <TextField fx:id="employeeCodeField" onInputMethodTextChanged="#onEmployeeCodeFieldChange" prefWidth="360.0" promptText="Employee ID">
-               <font>
-                  <Font name="Monaco" size="24.0" />
-               </font>
-            </TextField>
+            <VBox>
+               <children>
+                  <Label text="Employee number:" />
+                  <TextField fx:id="employeeCodeField" onInputMethodTextChanged="#onEmployeeCodeFieldChange" prefWidth="360.0">
+                     <font>
+                        <Font name="Menlo Regular" size="24.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
             <Button mnemonicParsing="false" onAction="#onLogin" text="Login">
                <VBox.margin>
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
