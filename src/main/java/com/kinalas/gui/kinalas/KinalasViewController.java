@@ -4,8 +4,6 @@ import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
 import javafx.collections.ListChangeListener;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -29,11 +27,6 @@ public class KinalasViewController {
     @FXML private Label employeeInfoLabel;
     @FXML private Label timeLabel;
     @FXML private GridPane orderModifiersGridPane;
-
-    @FXML
-    private void onStart() {
-
-    }
 
     @FXML
     private void onAddOrder() {
@@ -137,6 +130,23 @@ public class KinalasViewController {
                                 kinalas.setCurrentOrder(order);
                             }
                         });
+
+                        VBox vBox = new VBox();
+
+                        // items
+                        order.getItems().addListener((ListChangeListener<Item>) orderItemsChange -> {
+                            while (orderItemsChange.next()) {
+                                if (orderItemsChange.wasAdded()) {
+                                    List<? extends Item> addedItems = orderItemsChange.getAddedSubList();
+                                    for (Item item : addedItems) {
+                                        vBox.getChildren().add(new Text(item.getName()));
+                                    }
+                                }
+                            }
+                        });
+
+                        tab.setContent(vBox);
+
                     }
                 } else if (change.wasRemoved()) {
                     if (kinalas.getOrders().size() < 1) kinalas.setCurrentOrder(null);

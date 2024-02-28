@@ -3,6 +3,8 @@ package com.kinalas.core.model.order;
 import com.kinalas.core.model.BaseModel;
 import com.kinalas.core.model.employee.Employee;
 import com.kinalas.core.model.orderable.item.Item;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +14,7 @@ public class Order extends BaseModel {
 
     private final Employee employee;
     private final int orderNumber;
-    private final ArrayList<Item> items;
+    private final ObservableList<Item> items;
     private Date checkoutDate = null;
 
     public Order(String id, Employee employee, int orderNumber, ArrayList<Item> items, Date checkoutDate) {
@@ -21,7 +23,7 @@ public class Order extends BaseModel {
         this.employee = employee;
         this.orderNumber = orderNumber;
         this.checkoutDate = checkoutDate;
-        this.items = items;
+        this.items = FXCollections.observableList(items);
     }
 
     public Order(Employee employee, int orderNumber) {
@@ -36,7 +38,7 @@ public class Order extends BaseModel {
         return orderNumber;
     }
 
-    public ArrayList<Item> getItems() {
+    public ObservableList<Item> getItems() {
         return items;
     }
 
