@@ -139,7 +139,18 @@ public class KinalasViewController {
                                 if (orderItemsChange.wasAdded()) {
                                     List<? extends Item> addedItems = orderItemsChange.getAddedSubList();
                                     for (Item item : addedItems) {
-                                        vBox.getChildren().add(new Text(item.getName()));
+                                        HBox hBox = new HBox();
+                                        hBox.setPadding(new Insets(10, 10, 0, 10));
+
+                                        Text itemName = new Text(item.getName());
+                                        Text itemPrice = new Text(String.format("%.2f", item.getPrice()));
+
+                                        Region space = new Region();
+                                        HBox.setHgrow(space, Priority.ALWAYS);
+
+                                        hBox.getChildren().addAll(itemName, space, itemPrice);
+
+                                        vBox.getChildren().add(hBox);
                                     }
                                 }
                             }
