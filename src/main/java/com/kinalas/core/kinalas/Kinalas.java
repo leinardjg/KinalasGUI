@@ -11,6 +11,7 @@ public class Kinalas {
     private final Employee employee;
     private final ArrayList<Item> availableItems;
     private final ArrayList<Order> orders;
+    private Order currentOrder;
     private final ArrayList<Order> checkedOutOrders;
     private int orderNumber = 1;
 
@@ -60,5 +61,13 @@ public class Kinalas {
 
     public ArrayList<Order> getCheckedOutOrders() {
         return checkedOutOrders;
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
     }
 }

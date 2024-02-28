@@ -3,6 +3,8 @@ package com.kinalas.gui.kinalas;
 import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -20,7 +22,6 @@ import java.util.Objects;
 public class KinalasViewController {
 
     private Kinalas kinalas;
-    private int currentIndex = 1;
     private final int itemsNumCol = 6;
 
     @FXML private TabPane itemsTabPane;
@@ -36,7 +37,21 @@ public class KinalasViewController {
 
     @FXML
     private void onAddOrder() {
-        ordersTabPane.getTabs().add(new Tab(String.format("Order %s", currentIndex++)));
+        Order order = kinalas.newOrder();
+        ordersTabPane.getTabs().add(new Tab(String.format("Order %s", order.getOrderNumber())));
+        ordersTabPane.getSelectionModel().selectLast();
+        ordersTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observableValue, Tab tab, Tab t1) {
+                kinalas.setCurrentOrder(order);
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteOrder() {
+        kinalas.getOrders().remove(kinalas.getCurrentOrder());
+        ordersTabPane.getTabs().remove(ordersTabPane.getSelectionModel().getSelectedItem());
     }
 
     protected void initialize(Kinalas kinalas) {
@@ -105,8 +120,10 @@ public class KinalasViewController {
     private void initializeOrders() {
         ordersTabPane.getTabs().clear();
 
+        kinalas.newOrder();
+
         for (Order order : kinalas.getOrders()) {
-            itemsTabPane.getTabs().add(new Tab(String.valueOf(order.getOrderNumber())));
+            ordersTabPane.getTabs().add(new Tab("Order " + order.getOrderNumber()));
         }
     }
 

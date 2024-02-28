@@ -21,7 +21,7 @@
                                        <children>
                                           <VBox HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete Order" VBox.vgrow="ALWAYS" />
+                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" VBox.vgrow="ALWAYS" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="1.0" top="2.0" />
