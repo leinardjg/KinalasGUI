@@ -3,6 +3,8 @@ package com.kinalas.core.kinalas;
 import com.kinalas.core.model.employee.Employee;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ public class Kinalas {
 
     private final Employee employee;
     private final ArrayList<Item> availableItems;
-    private final ArrayList<Order> orders;
+    private final ObservableList<Order> orders;
     private Order currentOrder;
     private final ArrayList<Order> checkedOutOrders;
     private int orderNumber = 1;
@@ -34,7 +36,7 @@ public class Kinalas {
         }
 
         this.availableItems = Item.getAll();
-        this.orders = new ArrayList<>();
+        this.orders = FXCollections.observableList(new ArrayList<>());
         this.checkedOutOrders = new ArrayList<>();
 
     }
@@ -49,13 +51,14 @@ public class Kinalas {
         return availableItems;
     }
 
-    public ArrayList<Order> getOrders() {
-        return new ArrayList<>(orders);
+    public ObservableList<Order> getOrders() {
+        return this.orders;
     }
 
     public Order newOrder() {
         Order order = new Order(this.employee, this.orderNumber++);
         this.orders.add(order);
+        this.currentOrder = order;
         return order;
     }
 

@@ -3,8 +3,9 @@ package com.kinalas.gui.kinalas;
 import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -17,7 +18,6 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class KinalasViewController {
 
@@ -37,15 +37,7 @@ public class KinalasViewController {
 
     @FXML
     private void onAddOrder() {
-        Order order = kinalas.newOrder();
-        ordersTabPane.getTabs().add(new Tab(String.format("Order %s", order.getOrderNumber())));
-        ordersTabPane.getSelectionModel().selectLast();
-        ordersTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-            @Override
-            public void changed(ObservableValue<? extends Tab> observableValue, Tab tab, Tab t1) {
-                kinalas.setCurrentOrder(order);
-            }
-        });
+        kinalas.newOrder();
     }
 
     @FXML
@@ -86,6 +78,8 @@ public class KinalasViewController {
 
             for (int i=0, j=0; i < items.size(); i++, j++) {
 
+                Item item = items.get(i);
+
                 StackPane parentPane = new StackPane();
                 parentPane.setPadding(new Insets(2));
 
@@ -93,7 +87,7 @@ public class KinalasViewController {
                 pane.setPadding(new Insets(10));
                 pane.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
-                Text text = new Text(items.get(i).getName());
+                Text text = new Text(item.getName());
                 text.setWrappingWidth(80);
                 text.setTextAlignment(TextAlignment.CENTER);
 
@@ -101,6 +95,13 @@ public class KinalasViewController {
                 parentPane.getChildren().add(pane);
 
                 GridPane.setConstraints(parentPane, i % itemsNumCol, j / itemsNumCol);
+
+                parentPane.setOnMouseClicked(mouseEvent -> {
+                    if (kinalas.getCurrentOrder() != null) {
+                        kinalas.getCurrentOrder().getItems().add(Item.get(item.getId()));
+                    }
+                });
+
                 gridPane.getChildren().add(parentPane);
 
             }
@@ -118,13 +119,32 @@ public class KinalasViewController {
     }
 
     private void initializeOrders() {
+
         ordersTabPane.getTabs().clear();
+        kinalas.getOrders().addListener((ListChangeListener<Order>) change -> {
+            while (change.next()) {
 
-        kinalas.newOrder();
+                if (change.wasAdded()) {
+                    List<? extends Order> added = change.getAddedSubList();
+                    for (Order order : added) {
+                        Tab tab = new Tab("Order " + order.getOrderNumber());
+                        ordersTabPane.getTabs().add(tab);
+                        ordersTabPane.getSelectionModel().selectLast();
+                        kinalas.setCurrentOrder(order);
 
-        for (Order order : kinalas.getOrders()) {
-            ordersTabPane.getTabs().add(new Tab("Order " + order.getOrderNumber()));
-        }
+                        tab.setOnSelectionChanged(event -> {
+                            if (ordersTabPane.getSelectionModel().getSelectedItem().equals(tab)){
+                                kinalas.setCurrentOrder(order);
+                            }
+                        });
+                    }
+                } else if (change.wasRemoved()) {
+                    if (kinalas.getOrders().size() < 1) kinalas.setCurrentOrder(null);
+                }
+
+            }
+        });
+
     }
 
 }
