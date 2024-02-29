@@ -1,5 +1,6 @@
 package com.kinalas.gui.kinalas.components.orderTab;
 
+import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
 import javafx.collections.ListChangeListener;

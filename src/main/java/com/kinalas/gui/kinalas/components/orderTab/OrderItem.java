@@ -11,9 +11,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OrderItem extends VBox {
 
     private final String highlightedStyle = "-fx-background-color: #00CC9937; -fx-background-radius: 8px";
@@ -35,6 +32,14 @@ public class OrderItem extends VBox {
 
         VBox vBox = new VBox();
 
+        Kinalas.getInstance().getSelectedItems().addListener((ListChangeListener<Item>) change -> {
+            if (change.getList().contains(item)) {
+                highlight();
+            } else {
+                unHighlight();
+            }
+        });
+
         item.getModifiers().addListener((ListChangeListener<OrderModifier>) change -> {
             vBox.getChildren().clear();
             for (OrderModifier modifier : item.getModifiers()) {
@@ -42,7 +47,7 @@ public class OrderItem extends VBox {
                 Text modifierPrice = new Text(String.format("%.2f", modifier.getPrice()));
 
                 if (modifier.getPrice() == 0.00) {
-                    modifierPrice.setText("");    
+                    modifierPrice.setText("");
                 }
 
                 Region spacer = new Region();
@@ -57,14 +62,23 @@ public class OrderItem extends VBox {
         this.getChildren().add(vBox);
 
         this.setOnMouseClicked(mouseEvent -> {
-            if (Kinalas.getInstance().getSelectedItems().contains(item)) {
-                Kinalas.getInstance().getSelectedItems().remove(item);
-                this.setStyle("");
+            if (!Kinalas.getInstance().getSelectedItems().contains(item)) {
+                Kinalas.getInstance().getSelectedItems().add(this.item);
             } else {
-                Kinalas.getInstance().getSelectedItems().add(item);
-                this.setStyle(highlightedStyle);
+                Kinalas.getInstance().getSelectedItems().remove(this.item);
             }
         });
+
+        Kinalas.getInstance().getSelectedItems().clear();
+        Kinalas.getInstance().getSelectedItems().add(item);
+    }
+
+    public void highlight() {
+        this.setStyle(highlightedStyle);
+    }
+
+    public void unHighlight() {
+        this.setStyle("");
     }
 
     public Item getItem() {
