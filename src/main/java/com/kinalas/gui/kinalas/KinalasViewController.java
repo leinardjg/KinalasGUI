@@ -2,6 +2,7 @@ package com.kinalas.gui.kinalas;
 
 import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
+import com.kinalas.core.model.orderModifier.OrderModifier;
 import com.kinalas.core.model.orderable.item.Item;
 import com.kinalas.gui.kinalas.components.orderTab.OrderTab;
 import javafx.collections.ListChangeListener;
@@ -20,9 +21,17 @@ import java.util.List;
 
 public class KinalasViewController {
 
+    private enum Mode {
+        DEFAULT,
+        ADD,
+        NO,
+        PICK
+    }
+
     private Kinalas kinalas;
     private final int itemsNumCol = 6;
     private Item selectedOrderItem;
+    private Mode mode = Mode.DEFAULT;
 
     @FXML private TabPane itemsTabPane;
     @FXML private TabPane ordersTabPane;
@@ -48,6 +57,7 @@ public class KinalasViewController {
         this.initializeTime();
         this.initializeItems();
         this.initializeOrders();
+        this.initializeOrderModifiers();
 
     }
 
@@ -93,8 +103,18 @@ public class KinalasViewController {
 
                 parentPane.setOnMouseClicked(mouseEvent -> {
                     if (kinalas.getCurrentOrder() != null) {
-                        kinalas.getCurrentOrder().getItems().add(Item.get(item.getId()));
+                        if (mode == Mode.DEFAULT) kinalas.getCurrentOrder().getItems().add(Item.get(item.getId()));
+                        else {
+                            for (Item selectedItem : kinalas.getSelectedItems()) {
+                                switch (mode) {
+                                    case ADD -> selectedItem.getModifiers().add(new OrderModifier("Add", item, 1, 0));
+                                    case NO -> selectedItem.getModifiers().add(new OrderModifier("No", item, 0, 0));
+                                    case PICK -> selectedItem.getModifiers().add(new OrderModifier("is", item, 0, 0));
+                                }
+                            }
+                        }
                     }
+                    mode = Mode.DEFAULT;
                 });
 
                 gridPane.getChildren().add(parentPane);
@@ -140,6 +160,41 @@ public class KinalasViewController {
 
             }
         });
+
+    }
+
+    private void initializeOrderModifiers() {
+
+        HBox.setHgrow(orderModifiersGridPane, Priority.ALWAYS);
+        orderModifiersGridPane.setPadding(new Insets(2));
+
+        StackPane addPaneInner = new StackPane(new Text("add"));
+        StackPane noPaneInner = new StackPane(new Text("no"));
+        StackPane pickPaneInner = new StackPane(new Text("pick"));
+
+        StackPane addPane = new StackPane(addPaneInner);
+        StackPane noPane = new StackPane(noPaneInner);
+        StackPane pickPane = new StackPane(pickPaneInner);
+
+        addPane.setPadding(new Insets(2));
+        noPane.setPadding(new Insets(2));
+        pickPane.setPadding(new Insets(2));
+
+        addPane.setPrefHeight(64);
+        noPane.setPrefHeight(64);
+        pickPane.setPrefHeight(64);
+
+        addPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
+        noPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
+        pickPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
+
+        orderModifiersGridPane.add(addPane, 0, 0);
+        orderModifiersGridPane.add(noPane, 1, 0);
+        orderModifiersGridPane.add(pickPane, 2, 0);
+
+        addPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.ADD);
+        noPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.NO);
+        pickPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.PICK);
 
     }
 

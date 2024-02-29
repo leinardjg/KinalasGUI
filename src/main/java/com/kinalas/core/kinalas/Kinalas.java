@@ -14,6 +14,7 @@ public class Kinalas {
     private final ArrayList<Item> availableItems;
     private final ObservableList<Order> orders;
     private Order currentOrder;
+    private final ObservableList<Item> selectedItems;
     private final ArrayList<Order> checkedOutOrders;
     private int orderNumber = 1;
 
@@ -40,6 +41,7 @@ public class Kinalas {
 
         this.availableItems = Item.getAll();
         this.orders = FXCollections.observableList(new ArrayList<>());
+        this.selectedItems = FXCollections.observableList(new ArrayList<>());
         this.checkedOutOrders = new ArrayList<>();
 
     }
@@ -88,4 +90,7 @@ public class Kinalas {
         return instance;
     }
 
+    public ObservableList<Item> getSelectedItems() {
+        return selectedItems;
+    }
 }
