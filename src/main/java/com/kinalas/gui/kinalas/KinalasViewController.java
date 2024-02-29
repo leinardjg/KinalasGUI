@@ -3,6 +3,7 @@ package com.kinalas.gui.kinalas;
 import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
+import com.kinalas.gui.kinalas.components.orderTab.OrderTab;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -21,6 +22,7 @@ public class KinalasViewController {
 
     private Kinalas kinalas;
     private final int itemsNumCol = 6;
+    private Item selectedOrderItem;
 
     @FXML private TabPane itemsTabPane;
     @FXML private TabPane ordersTabPane;
@@ -120,7 +122,7 @@ public class KinalasViewController {
                 if (change.wasAdded()) {
                     List<? extends Order> added = change.getAddedSubList();
                     for (Order order : added) {
-                        Tab tab = new Tab("Order " + order.getOrderNumber());
+                        OrderTab tab = new OrderTab(order);
                         ordersTabPane.getTabs().add(tab);
                         ordersTabPane.getSelectionModel().selectLast();
                         kinalas.setCurrentOrder(order);
@@ -130,33 +132,6 @@ public class KinalasViewController {
                                 kinalas.setCurrentOrder(order);
                             }
                         });
-
-                        VBox vBox = new VBox();
-
-                        // items
-                        order.getItems().addListener((ListChangeListener<Item>) orderItemsChange -> {
-                            while (orderItemsChange.next()) {
-                                if (orderItemsChange.wasAdded()) {
-                                    List<? extends Item> addedItems = orderItemsChange.getAddedSubList();
-                                    for (Item item : addedItems) {
-                                        HBox hBox = new HBox();
-                                        hBox.setPadding(new Insets(10, 10, 0, 10));
-
-                                        Text itemName = new Text(item.getName());
-                                        Text itemPrice = new Text(String.format("%.2f", item.getPrice()));
-
-                                        Region space = new Region();
-                                        HBox.setHgrow(space, Priority.ALWAYS);
-
-                                        hBox.getChildren().addAll(itemName, space, itemPrice);
-
-                                        vBox.getChildren().add(hBox);
-                                    }
-                                }
-                            }
-                        });
-
-                        tab.setContent(vBox);
 
                     }
                 } else if (change.wasRemoved()) {
