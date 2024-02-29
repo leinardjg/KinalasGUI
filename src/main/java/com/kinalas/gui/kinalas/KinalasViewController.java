@@ -46,8 +46,10 @@ public class KinalasViewController {
 
     @FXML
     private void onDeleteOrder() {
-        kinalas.getOrders().remove(kinalas.getCurrentOrder());
-        ordersTabPane.getTabs().remove(ordersTabPane.getSelectionModel().getSelectedItem());
+        if (kinalas.getOrders().size() > 1) {
+            kinalas.getOrders().remove(kinalas.getCurrentOrder());
+            ordersTabPane.getTabs().remove(ordersTabPane.getSelectionModel().getSelectedItem());
+        }
     }
 
     protected void initialize(Kinalas kinalas) {
@@ -160,6 +162,8 @@ public class KinalasViewController {
 
             }
         });
+
+        kinalas.newOrder();
 
     }
 
