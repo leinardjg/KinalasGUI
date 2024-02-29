@@ -19,8 +19,8 @@ public class KinalasGUI extends Application {
         Employee employee = login.start(loginStage);
 
         Stage kinalasStage = new Stage();
-        Kinalas kinalas = new Kinalas(employee.getId());
-        KinalasView kinalasView = new KinalasView(kinalasStage, kinalas);
+        Kinalas.initialize(employee);
+        KinalasView kinalasView = new KinalasView(kinalasStage, Kinalas.getInstance());
         kinalasView.start();
 
     }

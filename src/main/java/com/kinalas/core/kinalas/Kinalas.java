@@ -17,6 +17,9 @@ public class Kinalas {
     private final ArrayList<Order> checkedOutOrders;
     private int orderNumber = 1;
 
+    // static
+    private static Kinalas instance;
+
     // region constants
 
     private final int maxBills = 100;
@@ -26,7 +29,7 @@ public class Kinalas {
 
     // region constructors
 
-    public Kinalas(String employeeID) {
+    private Kinalas(String employeeID) {
 
         this.employee = Employee.get(employeeID);
 
@@ -73,4 +76,16 @@ public class Kinalas {
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
     }
+
+    public static void initialize(Employee employee) {
+        instance = new Kinalas(employee.getId());
+    }
+
+    public static Kinalas getInstance() {
+        if (instance == null) {
+            throw new RuntimeException("Instance not initialized.");
+        }
+        return instance;
+    }
+
 }
