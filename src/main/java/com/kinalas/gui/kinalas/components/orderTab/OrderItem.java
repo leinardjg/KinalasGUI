@@ -67,6 +67,7 @@ public class OrderItem extends VBox {
             } else {
                 Kinalas.getInstance().getSelectedItems().remove(this.item);
             }
+            mouseEvent.consume();
         });
 
         Kinalas.getInstance().getSelectedItems().clear();
