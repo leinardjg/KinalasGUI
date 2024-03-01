@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class KinalasGUI extends Application {
 
+    private final double taxMultiplier = 0.05d;
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -19,7 +21,7 @@ public class KinalasGUI extends Application {
         Employee employee = login.start(loginStage);
 
         Stage kinalasStage = new Stage();
-        Kinalas.initialize(employee);
+        Kinalas.initialize(employee, taxMultiplier);
         KinalasView kinalasView = new KinalasView(kinalasStage, Kinalas.getInstance());
         kinalasView.start();
 

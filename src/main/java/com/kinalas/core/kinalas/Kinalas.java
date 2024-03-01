@@ -17,6 +17,7 @@ public class Kinalas {
     private final ObservableList<Item> selectedItems;
     private final ArrayList<Order> checkedOutOrders;
     private int orderNumber = 1;
+    private double taxMultiplier = 0.0d;
 
     // static
     private static Kinalas instance;
@@ -30,9 +31,10 @@ public class Kinalas {
 
     // region constructors
 
-    private Kinalas(String employeeID) {
+    private Kinalas(String employeeID, double taxMultiplier) {
 
         this.employee = Employee.get(employeeID);
+        this.taxMultiplier = taxMultiplier;
 
         if (this.employee == null) {
             System.out.println("Employee not found");
@@ -79,8 +81,8 @@ public class Kinalas {
         this.currentOrder = currentOrder;
     }
 
-    public static void initialize(Employee employee) {
-        instance = new Kinalas(employee.getId());
+    public static void initialize(Employee employee, double taxMultiplier) {
+        instance = new Kinalas(employee.getId(), taxMultiplier);
     }
 
     public static Kinalas getInstance() {
@@ -92,5 +94,9 @@ public class Kinalas {
 
     public ObservableList<Item> getSelectedItems() {
         return selectedItems;
+    }
+
+    public double getTaxMultiplier() {
+        return taxMultiplier;
     }
 }
