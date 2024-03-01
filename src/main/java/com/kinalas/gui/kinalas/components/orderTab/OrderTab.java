@@ -5,6 +5,7 @@ import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderable.item.Item;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 
@@ -32,7 +33,11 @@ public class OrderTab extends Tab {
             }
         });
 
-        this.setContent(vBox);
+        ScrollPane scrollPane = new ScrollPane(vBox);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPadding(new Insets(10));
+
+        this.setContent(scrollPane);
     }
 
     public Order getOrder() {
