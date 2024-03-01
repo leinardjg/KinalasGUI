@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -38,6 +39,15 @@ public class KinalasViewController {
     @FXML private Label employeeInfoLabel;
     @FXML private Label timeLabel;
     @FXML private GridPane orderModifiersGridPane;
+
+    @FXML
+    private void onRemoveSelectedItems() {
+        kinalas.getCurrentOrder().getItems().removeAll(kinalas.getSelectedItems());
+    }
+
+    private void onCheckout() {
+
+    }
 
     @FXML
     private void onAddOrder() {
@@ -172,13 +182,9 @@ public class KinalasViewController {
         HBox.setHgrow(orderModifiersGridPane, Priority.ALWAYS);
         orderModifiersGridPane.setPadding(new Insets(2));
 
-        StackPane addPaneInner = new StackPane(new Text("add"));
-        StackPane noPaneInner = new StackPane(new Text("no"));
-        StackPane pickPaneInner = new StackPane(new Text("pick"));
-
-        StackPane addPane = new StackPane(addPaneInner);
-        StackPane noPane = new StackPane(noPaneInner);
-        StackPane pickPane = new StackPane(pickPaneInner);
+        ToggleButton addPane = new ToggleButton("add");
+        ToggleButton noPane = new ToggleButton("no");
+        ToggleButton pickPane = new ToggleButton("pick");
 
         addPane.setPadding(new Insets(2));
         noPane.setPadding(new Insets(2));
@@ -188,17 +194,34 @@ public class KinalasViewController {
         noPane.setPrefHeight(64);
         pickPane.setPrefHeight(64);
 
-        addPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
-        noPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
-        pickPaneInner.setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
-
         orderModifiersGridPane.add(addPane, 0, 0);
         orderModifiersGridPane.add(noPane, 1, 0);
         orderModifiersGridPane.add(pickPane, 2, 0);
 
-        addPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.ADD);
-        noPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.NO);
-        pickPaneInner.setOnMouseClicked(mouseEvent -> mode = Mode.PICK);
+        addPane.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) {
+                mode = Mode.ADD;
+                addPane.setSelected(true);
+            } else {
+                addPane.setSelected(false);
+            }
+        });
+        noPane.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) {
+                mode = Mode.NO;
+                noPane.setSelected(true);
+            } else {
+                noPane.setSelected(false);
+            }
+        });
+        pickPane.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) {
+                mode = Mode.PICK;
+                pickPane.setSelected(true);
+            } else {
+                pickPane.setSelected(false);
+            }
+        });
 
     }
 

@@ -19,22 +19,22 @@
                                     <TabPane fx:id="ordersTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
                                     <HBox prefHeight="75.0" VBox.vgrow="NEVER">
                                        <children>
-                                          <VBox HBox.hgrow="ALWAYS">
+                                          <GridPane HBox.hgrow="ALWAYS">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
                                              <children>
-                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" VBox.vgrow="ALWAYS" />
+                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" />
+                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" GridPane.columnIndex="1" />
+                                                <Button layoutX="10.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveSelectedItems" text="Remove Items" GridPane.rowIndex="1" />
+                                                <Button layoutX="210.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Checkout" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
-                                             <padding>
-                                                <Insets bottom="2.0" left="2.0" right="1.0" top="2.0" />
-                                             </padding>
-                                          </VBox>
-                                          <VBox HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" VBox.vgrow="ALWAYS" />
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="2.0" left="1.0" right="2.0" top="2.0" />
-                                             </padding>
-                                          </VBox>
+                                          </GridPane>
                                        </children>
                                     </HBox>
                                  </children>

@@ -28,11 +28,12 @@ public class OrderTab extends Tab {
         // items
         order.getItems().addListener((ListChangeListener<Item>) orderItemsChange -> {
             while (orderItemsChange.next()) {
-                if (orderItemsChange.wasAdded()) {
-                    List<? extends Item> addedItems = orderItemsChange.getAddedSubList();
-                    for (Item item : addedItems) {
-                        vBox.getChildren().add(new OrderItem(item));
-                    }
+                vBox.getChildren().clear();
+                for (Item item : orderItemsChange.getList()) {
+                    vBox.getChildren().add(new OrderItem(item));
+                }
+                if (orderItemsChange.wasRemoved()) {
+                    Kinalas.getInstance().getSelectedItems().clear();
                 }
             }
         });
