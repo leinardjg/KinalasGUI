@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -37,13 +39,17 @@ public class OrderTab extends Tab {
 
         ScrollPane scrollPane = new ScrollPane(vBox);
         scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background-color: transparent");
 
         scrollPane.setOnMouseClicked(mouseEvent -> {
             Kinalas.getInstance().getSelectedItems().clear();
             mouseEvent.consume();
         });
 
-        this.setContent(scrollPane);
+        Region space = new Region();
+        VBox.setVgrow(space, Priority.ALWAYS);
+
+        this.setContent(new VBox(scrollPane, space, new TotalBox(order)));
     }
 
     public Order getOrder() {
