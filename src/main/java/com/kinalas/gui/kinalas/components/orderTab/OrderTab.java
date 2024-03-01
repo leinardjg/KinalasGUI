@@ -41,15 +41,17 @@ public class OrderTab extends Tab {
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background-color: transparent");
 
-        scrollPane.setOnMouseClicked(mouseEvent -> {
+        Region space = new Region();
+        VBox.setVgrow(space, Priority.ALWAYS);
+
+        VBox box = new VBox(scrollPane, space, new TotalBox(order));
+
+        box.setOnMouseClicked(mouseEvent -> {
             Kinalas.getInstance().getSelectedItems().clear();
             mouseEvent.consume();
         });
 
-        Region space = new Region();
-        VBox.setVgrow(space, Priority.ALWAYS);
-
-        this.setContent(new VBox(scrollPane, space, new TotalBox(order)));
+        this.setContent(box);
     }
 
     public Order getOrder() {
