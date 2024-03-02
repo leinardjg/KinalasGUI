@@ -32,7 +32,7 @@
                                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" />
                                                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" GridPane.columnIndex="1" />
                                                 <Button layoutX="10.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveSelectedItems" text="Remove Items" GridPane.rowIndex="1" />
-                                                <Button layoutX="210.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Checkout" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Button layoutX="210.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCheckout" text="Checkout" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                        </children>

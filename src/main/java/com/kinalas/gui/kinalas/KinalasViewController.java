@@ -4,6 +4,7 @@ import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderModifier.OrderModifier;
 import com.kinalas.core.model.orderable.item.Item;
+import com.kinalas.gui.kinalas.components.orderTab.OrderItem;
 import com.kinalas.gui.kinalas.components.orderTab.OrderTab;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class KinalasViewController {
 
@@ -45,8 +47,13 @@ public class KinalasViewController {
         kinalas.getCurrentOrder().getItems().removeAll(kinalas.getSelectedItems());
     }
 
+    @FXML
     private void onCheckout() {
-
+        Order order = kinalas.getCurrentOrder();
+        if (order.create()) {
+            kinalas.getCheckedOutOrders().add(order);
+            kinalas.getOrders().remove(order);
+        }
     }
 
     @FXML
@@ -164,10 +171,15 @@ public class KinalasViewController {
                                 kinalas.setCurrentOrder(order);
                             }
                         });
-
                     }
                 } else if (change.wasRemoved()) {
                     if (kinalas.getOrders().size() < 1) kinalas.setCurrentOrder(null);
+
+                    for (Order order : change.getRemoved()) {
+                        ordersTabPane.getTabs().removeIf(tab -> Objects.equals(((OrderTab) tab).getOrder().getId(), order.getId()));
+                    }
+
+                    ordersTabPane.getSelectionModel().selectLast();
                 }
 
             }
