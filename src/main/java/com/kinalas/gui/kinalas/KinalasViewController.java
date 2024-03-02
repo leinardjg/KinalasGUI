@@ -65,7 +65,6 @@ public class KinalasViewController {
     private void onDeleteOrder() {
         if (kinalas.getOrders().size() > 1) {
             kinalas.getOrders().remove(kinalas.getCurrentOrder());
-            ordersTabPane.getTabs().remove(ordersTabPane.getSelectionModel().getSelectedItem());
         }
     }
 
