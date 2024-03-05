@@ -18,6 +18,7 @@ public class OrderItem extends VBox {
     private final Item item;
 
     public OrderItem(Item item) {
+
         this.item = item;
 
         this.setPadding(new Insets(5));
@@ -58,6 +59,22 @@ public class OrderItem extends VBox {
                 vBox.getChildren().add(hBox);
             }
         });
+
+        for (OrderModifier modifier : item.getModifiers()) {
+            Text modifierName = new Text(modifier.getName() + " " + modifier.getTarget().getName());
+            Text modifierPrice = new Text(String.format("%.2f", modifier.getPrice()));
+
+            if (modifier.getPrice() == 0.00) {
+                modifierPrice.setText("");
+            }
+
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            HBox hBox = new HBox(modifierName, spacer, modifierPrice);
+            hBox.setPadding(new Insets(5, 0, 0, 10));
+
+            vBox.getChildren().add(hBox);
+        }
 
         this.getChildren().add(vBox);
 
