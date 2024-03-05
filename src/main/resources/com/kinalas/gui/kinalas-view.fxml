@@ -29,10 +29,38 @@
                                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" />
-                                                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" GridPane.columnIndex="1" />
-                                                <Button layoutX="10.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveSelectedItems" text="Remove Items" GridPane.rowIndex="1" />
-                                                <Button layoutX="210.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCheckout" text="Checkout" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <StackPane minHeight="32.0">
+                                                   <children>
+                                                      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="32.0" mnemonicParsing="false" onAction="#onDeleteOrder" text="Delete Order" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </padding>
+                                                </StackPane>
+                                                <StackPane minHeight="32.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="32.0" mnemonicParsing="false" onAction="#onAddOrder" text="Add new order" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </padding>
+                                                </StackPane>
+                                                <StackPane minHeight="32.0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="32.0" mnemonicParsing="false" onAction="#onRemoveSelectedItems" text="Remove Items" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </padding>
+                                                </StackPane>
+                                                <StackPane minHeight="32.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="32.0" mnemonicParsing="false" onAction="#onCheckout" text="Checkout" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </padding>
+                                                </StackPane>
                                              </children>
                                           </GridPane>
                                        </children>
@@ -45,24 +73,6 @@
                            <children>
                               <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TabPane fx:id="itemsTabPane" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                                      <tabs>
-                                        <Tab text="Combos" />
-                                        <Tab text="Foods" />
-                                      </tabs>
-                                    </TabPane>
-                                    <GridPane fx:id="orderModifiersGridPane" alignment="CENTER">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
                                     <HBox VBox.vgrow="NEVER">
                                        <children>
                                           <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
@@ -79,6 +89,24 @@
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
                                     </HBox>
+                                    <TabPane fx:id="itemsTabPane" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                      <tabs>
+                                        <Tab text="Combos" />
+                                        <Tab text="Foods" />
+                                      </tabs>
+                                    </TabPane>
+                                    <GridPane fx:id="orderModifiersGridPane" alignment="CENTER">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
                                  </children>
                               </VBox>
                            </children>

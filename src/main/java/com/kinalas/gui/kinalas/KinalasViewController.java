@@ -201,47 +201,53 @@ public class KinalasViewController {
         orderModifiersGridPane.setPadding(new Insets(2));
 
         OrderModifierButton addButton = new OrderModifierButton("ADD");
-        addButton.setOnMouseClicked(mouseEvent -> {
+        addButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode.ADD);
             addButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton freeButton = new OrderModifierButton("FREE");
-        freeButton.setOnMouseClicked(mouseEvent -> {
+        freeButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode.FREE);
             freeButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton pickButton = new OrderModifierButton("PICK");
-        pickButton.setOnMouseClicked(mouseEvent -> {
+        pickButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode.PICK);
             pickButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton noButton = new OrderModifierButton("NO");
-        noButton.setOnMouseClicked(mouseEvent -> {
+        noButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode.NO);
             noButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton _25Button = new OrderModifierButton("25%");
-        _25Button.setOnMouseClicked(mouseEvent -> {
+        _25Button.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode._25);
             _25Button.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton _50Button = new OrderModifierButton("50%");
-        _50Button.setOnMouseClicked(mouseEvent -> {
+        _50Button.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode._50);
             _50Button.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
         OrderModifierButton _75Button = new OrderModifierButton("75%");
-        _75Button.setOnMouseClicked(mouseEvent -> {
+        _75Button.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode._75);
             _75Button.setSelected(kinalas.getSelectedItems().size() > 0);
+            System.out.println(mode);
         });
 
+        HBox.setHgrow(addButton, Priority.ALWAYS);
+
+//        ColumnConstraints columnConstraints = new ColumnConstraints();
+//        columnConstraints.setPercentWidth(25);
+//        orderModifiersGridPane.getColumnConstraints().addAll(columnConstraints, columnConstraints, columnConstraints, columnConstraints);
 
         orderModifiersGridPane.add(addButton, 0, 0);
         orderModifiersGridPane.add(pickButton, 1, 0);
