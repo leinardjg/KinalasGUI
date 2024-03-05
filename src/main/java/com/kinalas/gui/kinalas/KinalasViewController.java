@@ -4,7 +4,7 @@ import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.order.Order;
 import com.kinalas.core.model.orderModifier.OrderModifier;
 import com.kinalas.core.model.orderable.item.Item;
-import com.kinalas.gui.kinalas.components.orderTab.OrderItem;
+import com.kinalas.gui.kinalas.components.orderModifiersGridPane.OrderModifierButton;
 import com.kinalas.gui.kinalas.components.orderTab.OrderTab;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -12,7 +12,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -27,14 +26,16 @@ public class KinalasViewController {
     private enum Mode {
         DEFAULT,
         ADD,
-        NO,
-        PICK
+        FREE,
+        PICK,
+
+        NO, _25, _50, _75
     }
 
     private Kinalas kinalas;
     private final int itemsNumCol = 6;
-    private Item selectedOrderItem;
     private Mode mode = Mode.DEFAULT;
+    private final ArrayList<OrderModifierButton> orderModifierButtons = new ArrayList<>();
 
     @FXML private TabPane itemsTabPane;
     @FXML private TabPane ordersTabPane;
@@ -126,13 +127,15 @@ public class KinalasViewController {
                             for (Item selectedItem : kinalas.getSelectedItems()) {
                                 switch (mode) {
                                     case ADD -> selectedItem.getModifiers().add(new OrderModifier("Add", item, 1, 0));
+                                    case PICK -> selectedItem.getModifiers().add(new OrderModifier("Pick", item, 0, 0));
                                     case NO -> selectedItem.getModifiers().add(new OrderModifier("No", item, 0, 0));
-                                    case PICK -> selectedItem.getModifiers().add(new OrderModifier("is", item, 0, 0));
+                                    case _25 -> selectedItem.getModifiers().add(new OrderModifier("25%", item, 0, 0));
+                                    case _50 -> selectedItem.getModifiers().add(new OrderModifier("50%", item, 0, 0));
+                                    case _75 -> selectedItem.getModifiers().add(new OrderModifier("75%", item, 0, 0));
                                 }
                             }
                         }
                     }
-                    mode = Mode.DEFAULT;
                 });
 
                 gridPane.getChildren().add(parentPane);
@@ -184,6 +187,10 @@ public class KinalasViewController {
             }
         });
 
+        kinalas.getSelectedItems().addListener((ListChangeListener<Item>) change -> {
+            if (change.getList().size() < 1) setMode(Mode.DEFAULT);
+        });
+
         kinalas.newOrder();
 
     }
@@ -193,47 +200,78 @@ public class KinalasViewController {
         HBox.setHgrow(orderModifiersGridPane, Priority.ALWAYS);
         orderModifiersGridPane.setPadding(new Insets(2));
 
-        ToggleButton addPane = new ToggleButton("add");
-        ToggleButton noPane = new ToggleButton("no");
-        ToggleButton pickPane = new ToggleButton("pick");
-
-        addPane.setPadding(new Insets(2));
-        noPane.setPadding(new Insets(2));
-        pickPane.setPadding(new Insets(2));
-
-        addPane.setPrefHeight(64);
-        noPane.setPrefHeight(64);
-        pickPane.setPrefHeight(64);
-
-        orderModifiersGridPane.add(addPane, 0, 0);
-        orderModifiersGridPane.add(noPane, 1, 0);
-        orderModifiersGridPane.add(pickPane, 2, 0);
-
-        addPane.setOnMouseClicked(mouseEvent -> {
-            if (kinalas.getSelectedItems().size() > 0) {
-                mode = Mode.ADD;
-                addPane.setSelected(true);
-            } else {
-                addPane.setSelected(false);
-            }
+        OrderModifierButton addButton = new OrderModifierButton("ADD");
+        addButton.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode.ADD);
+            addButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
-        noPane.setOnMouseClicked(mouseEvent -> {
-            if (kinalas.getSelectedItems().size() > 0) {
-                mode = Mode.NO;
-                noPane.setSelected(true);
-            } else {
-                noPane.setSelected(false);
-            }
+
+        OrderModifierButton freeButton = new OrderModifierButton("FREE");
+        freeButton.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode.FREE);
+            freeButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
-        pickPane.setOnMouseClicked(mouseEvent -> {
-            if (kinalas.getSelectedItems().size() > 0) {
-                mode = Mode.PICK;
-                pickPane.setSelected(true);
-            } else {
-                pickPane.setSelected(false);
-            }
+
+        OrderModifierButton pickButton = new OrderModifierButton("PICK");
+        pickButton.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode.PICK);
+            pickButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
+
+        OrderModifierButton noButton = new OrderModifierButton("NO");
+        noButton.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode.NO);
+            noButton.setSelected(kinalas.getSelectedItems().size() > 0);
+        });
+
+        OrderModifierButton _25Button = new OrderModifierButton("25%");
+        _25Button.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode._25);
+            _25Button.setSelected(kinalas.getSelectedItems().size() > 0);
+        });
+
+        OrderModifierButton _50Button = new OrderModifierButton("50%");
+        _50Button.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode._50);
+            _50Button.setSelected(kinalas.getSelectedItems().size() > 0);
+        });
+
+        OrderModifierButton _75Button = new OrderModifierButton("75%");
+        _75Button.setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode._75);
+            _75Button.setSelected(kinalas.getSelectedItems().size() > 0);
+        });
+
+
+        orderModifiersGridPane.add(addButton, 0, 0);
+        orderModifiersGridPane.add(pickButton, 1, 0);
+        orderModifiersGridPane.add(freeButton, 2, 0);
+        orderModifiersGridPane.add(noButton, 0, 1);
+        orderModifiersGridPane.add(_25Button, 1, 1);
+        orderModifiersGridPane.add(_50Button, 2, 1);
+        orderModifiersGridPane.add(_75Button, 3, 1);
+
+        orderModifierButtons.add(addButton);
+        orderModifierButtons.add(pickButton);
+        orderModifierButtons.add(freeButton);
+        orderModifierButtons.add(noButton);
+        orderModifierButtons.add(_25Button);
+        orderModifierButtons.add(_50Button);
+        orderModifierButtons.add(_75Button);
 
     }
+
+    // #region getters and setters
+
+    private void setMode(Mode mode) {
+
+        for (OrderModifierButton button : orderModifierButtons) {
+            button.setSelected(false);
+        }
+
+        this.mode = mode;
+    }
+
+    // #endregion
 
 }
