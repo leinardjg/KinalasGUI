@@ -20,27 +20,35 @@ public class KinalasGUI extends Application {
 
         // if first time, setup new employee
         if (Employee.getAll().size() < 1) {
-            FXMLLoader setupFXML = new FXMLLoader(KinalasGUI.class.getResource("kinalas-setup.fxml"));
+
+            FXMLLoader setupFXML = new FXMLLoader(KinalasGUI.class.getResource("setup/kinalas-setup.fxml"));
             secondaryStage.setResizable(false);
             Scene scene = new Scene(setupFXML.load(), 640, 480);
             secondaryStage.setTitle("Kinalas Setup");
             secondaryStage.setScene(scene);
             secondaryStage.showAndWait();
+
         }
 
-        // prompt login
-        Employee employee = new LoginView().start();
+        if (Employee.getAll().size() > 0) {
 
-        // main menu
-        FXMLLoader startFXML = new FXMLLoader(KinalasGUI.class.getResource("start/kinalas-start.fxml"));
-        stage.setResizable(false);
-        Scene scene = new Scene(startFXML.load(), 640, 480);
-        stage.setTitle("Kinalas");
-        stage.setScene(scene);
-        stage.show();
+            // prompt login
+            Employee employee = new LoginView().start();
 
-        // set employee
-        ((KinalasStart) startFXML.getController()).setEmployee(employee);
+            if (employee == null) return;
+
+            // main menu
+            FXMLLoader startFXML = new FXMLLoader(KinalasGUI.class.getResource("start/kinalas-start.fxml"));
+            stage.setResizable(false);
+            Scene scene = new Scene(startFXML.load(), 640, 480);
+            stage.setTitle("Kinalas");
+            stage.setScene(scene);
+            stage.show();
+
+            // set employee
+            ((KinalasStart) startFXML.getController()).setEmployee(employee);
+
+        }
 
     }
 
