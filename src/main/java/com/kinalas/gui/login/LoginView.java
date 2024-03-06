@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class LoginView {
 
-    public Employee start(Stage stage) throws IOException {
+    public Employee start() throws IOException {
+        Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("kinalas-login.fxml"));
         stage.setResizable(false);
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);

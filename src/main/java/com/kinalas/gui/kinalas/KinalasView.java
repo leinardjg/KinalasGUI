@@ -10,24 +10,9 @@ import java.io.IOException;
 
 public class KinalasView {
 
-    private final Stage stage;
-    private final Kinalas kinalas;
+    public KinalasView(Kinalas kinalas) throws IOException {
 
-    public KinalasView(Stage stage, Kinalas kinalas) {
-        this.stage = stage;
-        this.kinalas = kinalas;
-    }
 
-    public void start() throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("kinalas-view.fxml"));
-
-        stage.setResizable(true);
-        Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
-        ((KinalasViewController) fxmlLoader.getController()).initialize(this.kinalas);
-        stage.setTitle("Kinalas");
-        stage.setScene(scene);
-        stage.showAndWait();
 
     }
 

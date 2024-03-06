@@ -69,9 +69,10 @@ public class KinalasViewController {
         }
     }
 
-    protected void initialize(Kinalas kinalas) {
+    @FXML
+    private void initialize() {
 
-        this.kinalas = kinalas;
+        this.kinalas = Kinalas.getInstance();
         this.employeeInfoLabel.setText(kinalas.getEmployee().getFirstName() + " " + kinalas.getEmployee().getLastName() + " " + kinalas.getEmployee().getId());
         this.initializeTime();
         this.initializeItems();
