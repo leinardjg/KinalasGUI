@@ -28,6 +28,15 @@ module com.kinalas.kinalasgui {
     opens com.kinalas.gui.kinalas to javafx.fxml;
     exports com.kinalas.gui.kinalas;
 
+    opens com.kinalas.core.model to java.base;
+    exports com.kinalas.core.model;
+
+    opens com.kinalas.core.model.orderable.item to java.base;
+    exports com.kinalas.core.model.orderable.item;
+
+    opens com.kinalas.core.model.orderable to java.base;
+    exports com.kinalas.core.model.orderable;
+
     exports com.kinalas.core.model.employee;
     exports com.kinalas.core.kinalas;
 
