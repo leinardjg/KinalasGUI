@@ -3,7 +3,6 @@ package com.kinalas.gui.start;
 import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.employee.Employee;
 import com.kinalas.gui.KinalasGUI;
-import com.kinalas.gui.kinalas.KinalasViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

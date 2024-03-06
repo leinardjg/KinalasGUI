@@ -1,9 +1,6 @@
 package com.kinalas.gui;
 
-import com.kinalas.core.kinalas.Kinalas;
 import com.kinalas.core.model.employee.Employee;
-import com.kinalas.gui.kinalas.KinalasView;
-import com.kinalas.gui.login.LoginController;
 import com.kinalas.gui.login.LoginView;
 import com.kinalas.gui.start.KinalasStart;
 import javafx.application.Application;
@@ -14,8 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class KinalasGUI extends Application {
-
-    private final double taxMultiplier = 0.05d;
 
     @Override
     public void start(Stage stage) throws IOException {
