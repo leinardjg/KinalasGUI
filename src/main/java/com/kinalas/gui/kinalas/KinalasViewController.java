@@ -198,7 +198,6 @@ public class KinalasViewController {
     private void initializeOrderModifiers() {
 
         HBox.setHgrow(orderModifiersGridPane, Priority.ALWAYS);
-        orderModifiersGridPane.setPadding(new Insets(2));
 
         OrderModifierButton addButton = new OrderModifierButton("ADD");
         addButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
@@ -242,12 +241,6 @@ public class KinalasViewController {
             _75Button.setSelected(kinalas.getSelectedItems().size() > 0);
             System.out.println(mode);
         });
-
-        HBox.setHgrow(addButton, Priority.ALWAYS);
-
-//        ColumnConstraints columnConstraints = new ColumnConstraints();
-//        columnConstraints.setPercentWidth(25);
-//        orderModifiersGridPane.getColumnConstraints().addAll(columnConstraints, columnConstraints, columnConstraints, columnConstraints);
 
         orderModifiersGridPane.add(addButton, 0, 0);
         orderModifiersGridPane.add(pickButton, 1, 0);
