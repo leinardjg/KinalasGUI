@@ -51,7 +51,7 @@ public class KinalasStart {
         FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("admin/kinalas-admin.fxml"));
 
         stage.setResizable(true);
-        Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
+        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         stage.setTitle("Kinalas Admin");
         stage.setScene(scene);
         stage.show();

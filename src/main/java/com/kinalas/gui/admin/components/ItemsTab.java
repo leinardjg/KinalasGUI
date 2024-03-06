@@ -3,10 +3,14 @@ package com.kinalas.gui.admin.components;
 import com.kinalas.core.model.orderable.item.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 public class ItemsTab extends Tab {
 
@@ -17,6 +21,7 @@ public class ItemsTab extends Tab {
         this.setText("Items");
 
         TableView<Item> tableView = new TableView<>();
+        VBox.setVgrow(tableView, Priority.ALWAYS);
 
         TableColumn<Item, String> itemIDColumn = new TableColumn<>("Item ID");
         itemIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -42,7 +47,17 @@ public class ItemsTab extends Tab {
         tableView.setItems(items);
         tableView.getColumns().forEach(column -> column.setReorderable(false));
 
-        this.setContent(tableView);
+        Label label = new Label("Items");
+        label.setStyle("-fx-font-size: 20");
+
+        Hyperlink link = new Hyperlink("Create new");
+        link.setPadding(new Insets(0, 8, 0, 8));
+
+        HBox hBox = new HBox(label, link);
+        hBox.setAlignment(Pos.BASELINE_LEFT);
+        hBox.setPadding(new Insets(16, 4, 16, 4));
+
+        this.setContent(new VBox(hBox, tableView));
 
     }
 
