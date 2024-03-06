@@ -13,8 +13,17 @@ module com.kinalas.kinalasgui {
     exports com.kinalas.gui;
     opens com.kinalas.gui to javafx.fxml;
 
+    opens com.kinalas.gui.setup to javafx.fxml;
+    exports com.kinalas.gui.setup;
+
+    opens com.kinalas.gui.start to javafx.fxml;
+    exports com.kinalas.gui.start;
+
     opens com.kinalas.gui.login to javafx.fxml;
     exports com.kinalas.gui.login;
+
+    opens com.kinalas.gui.admin to javafx.fxml;
+    exports com.kinalas.gui.admin;
 
     opens com.kinalas.gui.kinalas to javafx.fxml;
     exports com.kinalas.gui.kinalas;
