@@ -59,10 +59,13 @@
                      </HBox.margin></Button>
                  </children>
                <VBox.margin>
-                  <Insets top="4.0" />
+                  <Insets top="16.0" />
                </VBox.margin>
              </HBox>
          </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
       </VBox>
    </children>
    <padding>
