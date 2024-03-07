@@ -29,6 +29,7 @@ public class KinalasViewController {
         ADD,
         FREE,
         PICK,
+        EXTRA,
 
         NO, _25, _50, _75
     }
@@ -133,6 +134,7 @@ public class KinalasViewController {
                                     case ADD -> selectedItem.getModifiers().add(new OrderModifier("Add", item, 1, 0));
                                     case PICK -> selectedItem.getModifiers().add(new OrderModifier("Pick", item, 0, 0));
                                     case NO -> selectedItem.getModifiers().add(new OrderModifier("No", item, 0, 0));
+                                    case EXTRA -> selectedItem.getModifiers().add(new OrderModifier("Extra", item, 0.5, 0));
                                     case _25 -> selectedItem.getModifiers().add(new OrderModifier("25%", item, 0, 0));
                                     case _50 -> selectedItem.getModifiers().add(new OrderModifier("50%", item, 0, 0));
                                     case _75 -> selectedItem.getModifiers().add(new OrderModifier("75%", item, 0, 0));
@@ -217,6 +219,12 @@ public class KinalasViewController {
             freeButton.setSelected(kinalas.getSelectedItems().size() > 0);
         });
 
+        OrderModifierButton extraButton = new OrderModifierButton("EXTRA");
+        extraButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
+            if (kinalas.getSelectedItems().size() > 0) setMode(Mode.EXTRA);
+            extraButton.setSelected(kinalas.getSelectedItems().size() > 0);
+        });
+
         OrderModifierButton pickButton = new OrderModifierButton("PICK");
         pickButton.getToggleButton().setOnMouseClicked(mouseEvent -> {
             if (kinalas.getSelectedItems().size() > 0) setMode(Mode.PICK);
@@ -251,6 +259,7 @@ public class KinalasViewController {
         orderModifiersGridPane.add(addButton, 0, 0);
         orderModifiersGridPane.add(pickButton, 1, 0);
         orderModifiersGridPane.add(freeButton, 2, 0);
+        orderModifiersGridPane.add(extraButton, 3, 0);
         orderModifiersGridPane.add(noButton, 0, 1);
         orderModifiersGridPane.add(_25Button, 1, 1);
         orderModifiersGridPane.add(_50Button, 2, 1);
@@ -259,6 +268,7 @@ public class KinalasViewController {
         orderModifierButtons.add(addButton);
         orderModifierButtons.add(pickButton);
         orderModifierButtons.add(freeButton);
+        orderModifierButtons.add(extraButton);
         orderModifierButtons.add(noButton);
         orderModifierButtons.add(_25Button);
         orderModifierButtons.add(_50Button);
