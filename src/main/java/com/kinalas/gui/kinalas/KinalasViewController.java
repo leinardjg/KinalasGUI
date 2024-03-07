@@ -10,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
@@ -151,7 +152,10 @@ public class KinalasViewController {
                 gridPane.getColumnConstraints().add(columnConstraints);
             }
 
-            tab.setContent(gridPane);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(gridPane);
+            scrollPane.setFitToWidth(true);
+            tab.setContent(scrollPane);
         }
 
     }
