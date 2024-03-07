@@ -31,7 +31,9 @@ public class KinalasSetup {
             Employee employee = new Employee(firstName, lastName, 0);
 
             if (employee.create()) {
-                new Alert(Alert.AlertType.CONFIRMATION, String.format("Employee %s %s %s created.", firstName, lastName, employee.getId())).showAndWait();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format("Employee %s %s %s created.", firstName, lastName, employee.getId()));
+                alert.getDialogPane().setHeaderText("Employee created");
+                alert.showAndWait();
                 ((Stage) submitButton.getScene().getWindow()).close();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Something went wrong.").showAndWait();

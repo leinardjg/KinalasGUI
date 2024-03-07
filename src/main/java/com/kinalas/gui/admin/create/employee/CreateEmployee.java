@@ -37,7 +37,9 @@ public class CreateEmployee {
 
             Employee employee = new Employee(firstNameField.getText().strip(), lastNameField.getText().strip(), accessLevelBox.getSelectionModel().getSelectedItem());
             if (employee.create()) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee successfully created.").showAndWait();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee successfully created");
+                alert.getDialogPane().setHeaderText("Employee created");
+                alert.showAndWait();
                 ((Stage) submitButton.getScene().getWindow()).close();
             }
         });
