@@ -33,7 +33,7 @@ public class KinalasViewController {
     }
 
     private Kinalas kinalas;
-    private final int itemsNumCol = 6;
+    private final int itemsNumCol = 4;
     private Mode mode = Mode.DEFAULT;
     private final ArrayList<OrderModifierButton> orderModifierButtons = new ArrayList<>();
 
@@ -119,6 +119,8 @@ public class KinalasViewController {
                 pane.getChildren().add(text);
                 parentPane.getChildren().add(pane);
 
+                pane.setMinHeight(72);
+
                 GridPane.setConstraints(parentPane, i % itemsNumCol, j / itemsNumCol);
 
                 parentPane.setOnMouseClicked(mouseEvent -> {
@@ -143,10 +145,9 @@ public class KinalasViewController {
 
             }
 
-            ColumnConstraints columnConstraints = new ColumnConstraints();
-            columnConstraints.setPercentWidth(100.0 / itemsNumCol);
-
             for (int i=0; i < itemsNumCol; i++) {
+                ColumnConstraints columnConstraints = new ColumnConstraints();
+                columnConstraints.setPercentWidth(100.0 / itemsNumCol);
                 gridPane.getColumnConstraints().add(columnConstraints);
             }
 
