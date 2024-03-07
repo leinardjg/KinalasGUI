@@ -1,15 +1,21 @@
 package com.kinalas.gui.admin.components;
 
 import com.kinalas.core.model.employee.Employee;
+import com.kinalas.gui.KinalasGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class EmployeeTab extends Tab {
 
@@ -54,6 +60,27 @@ public class EmployeeTab extends Tab {
         hBox.setPadding(new Insets(16, 4, 16, 4));
 
         this.setContent(new VBox(hBox, tableView));
+
+        // link on click
+        link.setOnMouseClicked(mouseEvent -> {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(KinalasGUI.class.getResource("admin/create/employee/create-employee.fxml"));
+            stage.setResizable(false);
+            Scene scene;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            stage.setTitle("Create new employee");
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.showAndWait();
+
+            employees.clear();
+            employees.addAll(Employee.getAll());
+
+        });
 
     }
 

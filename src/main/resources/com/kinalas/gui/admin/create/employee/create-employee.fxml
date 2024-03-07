@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kinalas.gui.admin.create.employee.CreateEmployee">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+             <HBox prefWidth="200.0">
+                 <children>
+                     <VBox HBox.hgrow="ALWAYS">
+                         <children>
+                             <Label text="First Name" />
+                             <TextField fx:id="firstNameField" />
+                         </children>
+                     <padding>
+                        <Insets right="1.0" />
+                     </padding>
+                     </VBox>
+                     <VBox HBox.hgrow="ALWAYS">
+                         <children>
+                             <Label text="Last Name" />
+                             <TextField fx:id="lastNameField" />
+                         </children>
+                     <padding>
+                        <Insets left="1.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     </VBox>
+                 </children>
+               <VBox.margin>
+                  <Insets top="16.0" />
+               </VBox.margin>
+             </HBox>
+             <VBox HBox.hgrow="ALWAYS">
+                 <children>
+                     <Label text="Access Level" />
+                     <ComboBox fx:id="accessLevelBox" prefWidth="150.0" promptText="Select">
+
+                     </ComboBox>
+                 </children>
+               <VBox.margin>
+                  <Insets top="4.0" />
+               </VBox.margin>
+             </VBox>
+             <HBox alignment="CENTER">
+                 <children>
+                     <Button fx:id="cancelButton" text="Cancel">
+                     <HBox.margin>
+                        <Insets right="1.0" />
+                     </HBox.margin></Button>
+                     <Button fx:id="submitButton" text="Create">
+                     <HBox.margin>
+                        <Insets left="1.0" />
+                     </HBox.margin></Button>
+                 </children>
+               <VBox.margin>
+                  <Insets top="4.0" />
+               </VBox.margin>
+             </HBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </padding>
+</AnchorPane>

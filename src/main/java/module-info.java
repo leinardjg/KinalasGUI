@@ -37,6 +37,12 @@ module com.kinalas.kinalasgui {
     opens com.kinalas.core.model.orderable to java.base;
     exports com.kinalas.core.model.orderable;
 
+    opens com.kinalas.gui.admin.create.employee to javafx.fxml;
+    exports com.kinalas.gui.admin.create.employee;
+
+    opens com.kinalas.gui.admin.create.item to javafx.fxml;
+    exports com.kinalas.gui.admin.create.item;
+
     exports com.kinalas.core.model.employee;
     exports com.kinalas.core.kinalas;
 
